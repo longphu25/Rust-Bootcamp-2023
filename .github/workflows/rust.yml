@@ -39,7 +39,7 @@ jobs:
     - name: Lint
       run: |
         cargo fmt -- --check
-        cargo clippy -- -D non-snake-case
+        cargo clippy -- -D warnings
     # - name: Build
     #   run: cargo build --verbose
     - name: Run tests
