@@ -1,8 +1,8 @@
 // Exercise 1
 // Fix all errors
-fn sum(x:i32 , y: i32) -> i32 {
+fn sum(x: i32, y: i32) -> i32 {
     return x + y;
- }
+}
 
 //Exercise 2
 // Input: Provide an arbitrary value of n
@@ -11,14 +11,13 @@ fn sum(x:i32 , y: i32) -> i32 {
 pub fn sum_one_to_n(n: u32) -> u32 {
     // your code for summing all digits from 1 to `n` (inclusive) should go
     // here (you can remove the sample return of `0`)
-    let mut sum:u32 = 0;
-    if n != 0{
-        for i in 1..n+1{
+    let mut sum: u32 = 0;
+    if n != 0 {
+        for i in 1..n + 1 {
             sum = sum + i;
         }
-    }
-    else {
-        return  0;
+    } else {
+        return 0;
     }
     return sum;
 }
@@ -30,28 +29,26 @@ pub fn sum_one_to_n(n: u32) -> u32 {
 fn calculate_average(numbers: &[f64]) -> f64 {
     if numbers.len() == 0 {
         return 0.0;
-    }
-    else {
-        let mut sum:f64 = 0.0;
-        for i in numbers{
+    } else {
+        let mut sum: f64 = 0.0;
+        for i in numbers {
             sum = sum + i;
         }
-        return sum/(numbers.len() as f64);
+        return sum / (numbers.len() as f64);
     }
 }
 
 // Exercise 4
 // Calculate the sum of all even numbers in a list
 fn sum_even_numbers(numbers: &[i32]) -> i32 {
-    let mut sum:i32 = 0;
-    for i in numbers{
-        if i%2 == 0 {
+    let mut sum: i32 = 0;
+    for i in numbers {
+        if i % 2 == 0 {
             sum = sum + i;
         }
     }
     return sum;
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -61,7 +58,7 @@ mod tests {
     #[test]
     fn sum_should_work() {
         let (x, y) = (1, 2);
-        let s:i32  = sum(x, y);
+        let s: i32 = sum(x, y);
 
         assert_eq!(s, 3);
     }
@@ -97,7 +94,6 @@ mod tests {
         let numbers = [2.5, 4.8, 6.3, 1.7, 3.9];
         let result = calculate_average(&numbers);
         assert_eq!(result, 3.84);
-
     }
 
     // Test for exercise 3
@@ -107,7 +103,6 @@ mod tests {
         let numbers = [];
         let result = calculate_average(&numbers);
         assert_eq!(result, 0.0);
-
     }
 
     // Test for exercise 4

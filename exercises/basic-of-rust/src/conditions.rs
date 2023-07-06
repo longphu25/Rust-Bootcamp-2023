@@ -4,11 +4,9 @@
 // - another function call
 // - additional variables
 pub fn bigger(a: i32, b: i32) -> i32 {
-    if a>b {
-        return  a;
-    }
-    else
-    {
+    if a > b {
+        return a;
+    } else {
         return b;
     }
 }
@@ -20,14 +18,12 @@ pub fn bigger(a: i32, b: i32) -> i32 {
 fn check_number(number: i32) -> &'static str {
     if number < 0 {
         return "Negative";
-    }
-    else if number > 0 {
+    } else if number > 0 {
         return "Positive";
-    }
-    else {
+    } else {
         return "Zero";
     }
- }
+}
 
 // Exercise 3
 // Step 1: Make me compile!
@@ -49,20 +45,17 @@ pub fn foo_if_fizz(fizzish: &str) -> &str {
 fn is_leap_year(year: i32) -> bool {
     // If a year is multiple of 400,
     // then it is a leap year
-    if year % 400 == 0
-    {
+    if year % 400 == 0 {
         return true;
     }
     // Else If a year is multiple of 100,
     // then it is not a leap year
-    if year % 100 == 0
-    {
+    if year % 100 == 0 {
         return false;
     }
     // Else If a year is multiple of 4,
     // then it is a leap year
-    if year % 4 == 0
-    {
+    if year % 4 == 0 {
         return true;
     }
     return false;
@@ -72,13 +65,12 @@ fn is_leap_year(year: i32) -> bool {
 // Calculate the factorial of a number
 // Implement logic
 fn factorial(n: u32) -> u32 {
-    let mut f:u32 = 1;
+    let mut f: u32 = 1;
     if n == 0 {
         return 1;
-    }
-    else {
-        for k in 1..n+1 {
-            f = f*k;
+    } else {
+        for k in 1..n + 1 {
+            f = f * k;
         }
     }
     return f;
@@ -91,19 +83,17 @@ fn factorial(n: u32) -> u32 {
 fn is_prime(n: u32) -> bool {
     if n == 0 || n == 1 {
         return false;
-    }
-    else {
-        for i in 2.. n+1 / 2 {
+    } else {
+        for i in 2..n + 1 / 2 {
             // if n is divisible by i, then n is not prime
             // change flag to 1 for non-prime number
             if n % i == 0 {
-              return false;
+                return false;
             }
-          }
+        }
     }
     return true;
 }
-
 
 // Don't mind this for now :)
 #[cfg(test)]
@@ -198,6 +188,4 @@ mod tests {
         assert_eq!(is_prime(10), false);
         assert_eq!(is_prime(15), false);
     }
-
-
 }

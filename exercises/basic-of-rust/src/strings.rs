@@ -1,7 +1,7 @@
 // Exercise 1
 #[allow(dead_code)]
 fn exercise1(color: &str) -> String {
-    return  color.to_string();
+    return color.to_string();
 }
 
 // Exercise 2
@@ -26,11 +26,10 @@ fn exercise3() -> String {
 // Reverse a string
 
 fn reverse_string(input: &str) -> String {
-
     if input.len() == 0 {
         return "".to_string();
     }
-    let mut s2:String = String::from("");
+    let mut s2: String = String::from("");
     let input: Vec<char> = input.chars().collect();
     let mut d = input.len() - 1;
     while d > 0 {
@@ -42,7 +41,6 @@ fn reverse_string(input: &str) -> String {
     return s2;
 }
 
-
 // Exercise 5
 // Check if a string is a palindrome
 fn is_palindrome(word: &str) -> bool {
@@ -53,15 +51,15 @@ fn is_palindrome(word: &str) -> bool {
     let mut d1 = 0;
     let mut d2 = word.len() - 1;
     while d1 < d2 {
-        if !word[d1].is_alphabetic(){
+        if !word[d1].is_alphabetic() {
             d1 += 1;
             continue;
         }
-        if !word[d2].is_alphabetic(){
-            d2 -= 1 ;
+        if !word[d2].is_alphabetic() {
+            d2 -= 1;
             continue;
         }
-        if word[d1].to_ascii_lowercase() != word[d2].to_ascii_lowercase(){
+        if word[d1].to_ascii_lowercase() != word[d2].to_ascii_lowercase() {
             return false;
         }
 
@@ -79,7 +77,7 @@ fn count_char_occurrences(string: &str, ch: char) -> usize {
     }
     let mut d = 0;
     let string: Vec<char> = string.chars().collect();
-    for i in 0..string.len(){
+    for i in 0..string.len() {
         if string[i].to_ascii_lowercase() == ch.to_ascii_lowercase() {
             d += 1;
         }
@@ -140,5 +138,4 @@ mod tests {
         assert_eq!(count_char_occurrences("Rust is fun", 'u'), 2);
         assert_eq!(count_char_occurrences("Mississippi", 's'), 4);
     }
-
 }
