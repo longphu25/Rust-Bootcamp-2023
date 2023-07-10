@@ -3,8 +3,8 @@
 fn exercise1() {
     // Use as many approaches as you can to make it work
     let x = String::from("hello, world");
-    let y = x;
-    let z = x;
+    let _y = &x;
+    let _z = x;
 }
 
 // Exercise 2
@@ -42,7 +42,7 @@ fn exercise3() {
         let mut addition: f64 = 0.0;
 
         // Sumar valores en additions
-        for element_index in additions {
+        for element_index in additions.clone() {
             let addition_aux = values[element_index];
             addition = addition_aux + addition;
         }
@@ -53,7 +53,8 @@ fn exercise3() {
 // Make it compile
 fn exercise4(value: u32) -> &'static str {
     let str_value = value.to_string(); // Convert u32 to String
-    let str_ref: &str = &str_value; // Obtain a reference to the String
+    // let str_ref: &str = &str_value; // Obtain a reference to the String
+    let str_ref: &'static str =  Box::leak(str_value.into_boxed_str());
     str_ref // Return the reference to the String
 }
 
@@ -61,16 +62,20 @@ fn exercise4(value: u32) -> &'static str {
 // Make it compile
 use std::collections::HashMap;
 fn exercise5() {
-    let mut my_map = HashMap::from([(1, "1.0".to_string()), (2, "2.0".to_string())]);
+    // let mut my_map = HashMap::from([(1, "1.0".to_string()), (2, "2.0".to_string())]);
+    let mut my_map:HashMap<i32,String> = HashMap::from([(1, "1.0".to_string()), (2, "2.0".to_string())]);
 
     let key = 3;
 
-    let res = match my_map.get(&key) {
+    // let res = match my_map.get(&key) {
+    let res = match my_map.get_mut(&key) {
         Some(child) => child,
         None => {
-            let value = "3.0".to_string();
+        //     let value = "3.0".to_string();
+            let value:String = "3.0".to_string();
             my_map.insert(key, value);
-            &value // HERE IT FAILS
+            // &value // HERE IT FAILS
+            my_map.get_mut(&key).unwrap()
         }
     };
 
@@ -83,14 +88,18 @@ fn exercise5() {
 use std::io;
 
 fn exercise6() {
-    let mut prev_key: &str = "";
+    // let mut prev_key: &str = "";
+    let mut prev_key: String = "".to_string();
+
 
     for line in io::stdin().lines() {
-        let s = line.unwrap();
+        // let s = line.unwrap();
+        let s:String = line.unwrap();
 
         let data: Vec<&str> = s.split("\t").collect();
         if prev_key.len() == 0 {
-            prev_key = data[0];
+            // prev_key = data[0];
+            prev_key = data[0].to_string();
         }
     }
 }
@@ -98,11 +107,13 @@ fn exercise6() {
 // Exercise 7
 // Make it compile
 fn exercise7() {
-    let mut v: Vec<&str> = Vec::new();
+    // let mut v: Vec<&str> = Vec::new();
+    let mut v: Vec<String> = Vec::new();
     {
         let chars = [b'x', b'y', b'z'];
         let s: &str = std::str::from_utf8(&chars).unwrap();
-        v.push(&s);
+        // v.push(&s);
+        v.push(s.to_string());
     }
     println!("{:?}", v);
 }
@@ -110,8 +121,9 @@ fn exercise7() {
 // Exercise 8
 // Make it compile
 fn exercise8() {
-    let mut accounting = vec!["Alice", "Ben"];
-    
+    // let mut accounting = vec!["Alice", "Ben"];
+    let mut accounting: Vec<String> = vec!["Alice".to_string(), "Ben".to_string()];
+
     loop {
         let mut add_input = String::from("");
 
@@ -127,6 +139,68 @@ fn exercise8() {
         }
 
         let person = add_vec[0];
-        accounting.push(person);
+        // accounting.push(person);
+        accounting.push(person.to_string());
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Test for exercise 1
+    #[test]
+    fn exercise1_work() {
+        exercise1();
+        assert_eq!("exercise1".to_string(), "exercise1".to_string());
+    }
+
+    // Test for exercise 2
+    #[test]
+    fn exercise2_work() {
+        exercise2();
+        assert_eq!("exercise2".to_string(), "exercise2".to_string());
+    }
+
+    // Test for exercise 3
+    // #[test]
+    // fn exercise3_work() {
+    //     exercise3();
+    //     assert_eq!("exercise3".to_string(), "exercise3".to_string());
+    // }
+
+    // Test for exercise 4
+    #[test]
+    fn exercise4_work() {
+        exercise4(25);
+        assert_eq!("exercise4".to_string(), "exercise4".to_string());
+    }
+
+    // Test for exercise 5
+    #[test]
+    fn exercise5_work() {
+        exercise5();
+        assert_eq!("exercise5".to_string(), "exercise5".to_string());
+    }
+
+    // Test for exercise 6
+    // #[test]
+    // fn exercise6_work() {
+    //     exercise6();
+    //     assert_eq!("exercise6".to_string(), "exercise6".to_string());
+    // }
+
+    // Test for exercise 7
+    #[test]
+    fn exercise7_work() {
+        exercise7();
+        assert_eq!("exercise7".to_string(), "exercise7".to_string());
+    }
+
+    // Test for exercise 8
+    // #[test]
+    // fn exercise8_work() {
+    //     exercise8();
+    //     assert_eq!("exercise8".to_string(), "exercise8".to_string());
+    // }
 }
